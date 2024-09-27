@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Fabricante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #444;
+            color: white;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        form {
+            width: 80%;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        a {
+            color: #5bc0de;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a:hover {
+            color: #31b0d5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Fabricante</h1>
+    <form th:action="@{/fabricator/{id}(id=${fabricator.id})}" th:object="${fabricator}" method="post">
+        <div>
+            <label for="name">Nome:</label>
+            <input type="text" id="name" th:field="*{name}" required />
+        </div>
+        <div>
+            <label for="date">Data:</label>
+            <input type="date" id="date" th:field="*{date}" required />
+        </div>
+        <div>
+            <button type="submit">Salvar</button>
+            <a th:href="@{/fabricator}">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>
+

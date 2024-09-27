@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Veículos</title>
+</head>
+<body>
+    <h1>Lista de Veículos</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #444;
+            color: white;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a, button {
+            color: #333;
+            text-decoration: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links a {
+            margin: 0 10px;
+            color: #5bc0de;
+            font-size: 16px;
+        }
+
+        .links a:hover {
+            color: #31b0d5;
+        }
+    </style>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Data de Lançamento</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Fabricante</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="vehicle : ${vehicles}">
+            <td th:text="${vehicle.id}"></td>
+            <td>
+                <img th:if="${vehicle.image != null}" th:src="@{${vehicle.image}}" alt="Vehicle Image" width="100"/>
+            </td>
+            <td th:text="${vehicle.name}"></td>
+            <td th:text="${vehicle.createDate}"></td>
+            <td th:text="${vehicle.type}"></td>
+            <td th:text="${vehicle.description}"></td>
+            <td th:text="${vehicle.fabricator.name}"></td>
+            <td>
+                <a th:href="@{/vehicles/{id}(id=${vehicle.id})}">Editar</a>
+                <form th:action="@{/vehicles/{id}/delete(id=${vehicle.id})}" method="post" style="display:inline;">
+                    <button type="submit" name="_method" value="delete">Deletar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    <div class="links">
+        <a href="/vehicles/new">Novo Veículo</a>
+        <a href="/">Voltar</a>
+    </div>
+
+</body>
+</html>
